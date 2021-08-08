@@ -49,6 +49,11 @@ Export The Table As A PDF
     Wait Until Element Is Visible    id:sales-results
     ${sales_results_html}=    Get Element Attribute    id:sales-results    outerHTML
     Html To Pdf    ${sales_results_html}    ${CURDIR}${/}output${/}sales_results.pdf
+
+*** Keywords ***
+Log Out And Close The Browser
+    Click Button    Log out
+
 *** Tasks ***
 Insert the sales data for the week and export it as a PDF
     Open The Intranet Website
@@ -56,5 +61,9 @@ Insert the sales data for the week and export it as a PDF
     Download The Excel File
     Fill The Form Using The Data From The Excel File
     Collect The Results
+    Export The Table As A PDF  
+    Log Out And Close The Browser
+    [Teardown]    Log Out And Close The Browser  
+    
+Collect The Results
     Export The Table As A PDF    
-
